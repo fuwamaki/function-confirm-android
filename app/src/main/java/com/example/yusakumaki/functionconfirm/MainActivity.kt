@@ -1,8 +1,7 @@
 package com.example.yusakumaki.functionconfirm
 
 import android.os.Bundle
-import android.support.v4.app.FragmentTransaction
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 
 
 class MainActivity : AppCompatActivity() {
