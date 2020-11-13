@@ -9,17 +9,21 @@
         android:id="@+id/main_fragment"
         android:name="com.example.yusakumaki.functionconfirm.MainFragment"
         android:label="fragment_first"
-        tools:layout="@layout/fragment_main" >
+        tools:layout="@layout/fragment_main">
         <action
             android:id="@+id/action_firstFragment_to_secondFragment"
-            app:destination="@id/secondFragment" />
+            app:destination="@id/secondFragment"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/slide_out"
+            app:popEnterAnim="@anim/slide_in"
+            app:popExitAnim="@anim/slide_out" />
     </fragment>
 
     <fragment
         android:id="@+id/secondFragment"
         android:name="com.example.yusakumaki.functionconfirm.SecondFragment"
         android:label="fragment_second"
-        tools:layout="@layout/fragment_second" >
+        tools:layout="@layout/fragment_second">
         <action
             android:id="@+id/action_back_to_mainFragment"
             app:destination="@id/main_fragment" />
