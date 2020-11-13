@@ -3,4 +3,23 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+    <color name="backgroundPrimary">#fefefe</color>
+    <color name="backgroundSecondary">#f5f5f5</color>
+    <color name="backgroundTertiary">#c8c8c8</color>
+    <color name="backgroundQuaternary">#b7b7b7</color>
+
+    <color name="textPrimary">#212121</color>
+    <color name="textSecondary">#757575</color>
+    <color name="textGray">#b7b7b7</color>
+    <color name="textReverse">#fefefe</color>
+
+    <color name="lemon">#f3f085</color>
+    <color name="mint">#96ceab</color>
+    <color name="ocean">#84b6e2</color>
+    <color name="aqua">#99d4dd</color>
+    <color name="grape">#737bbb</color>
+    <color name="peach">#eb7faf</color>
+    <color name="salmon">#ed7c7d</color>
+    <color name="skin">#edbb8b</color>
 </resources>
