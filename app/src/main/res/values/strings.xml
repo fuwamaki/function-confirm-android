@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">Function Confirm</string>
-    <string name="sample_test">サンプルテキスト</string>
+    <string name="text_sample_test">サンプルテキスト</string>
+    <string name="text_fragment_2">Fragment2</string>
+    <string name="text_button">ボタン</string>
 </resources>

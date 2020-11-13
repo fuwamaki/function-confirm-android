@@ -3,20 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/backgroundPrimary">
+    android:background="@color/backgroundSecondary">
 
     <TextView
-        android:id="@+id/main_sample_text_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/text_sample_test"
+        android:text="@string/text_fragment_2"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/text_button"
-        app:layout_constraintTop_toBottomOf="@id/main_sample_text_view"
-        app:layout_constraintStart_toStartOf="parent"/>
 
 </android.support.constraint.ConstraintLayout>
