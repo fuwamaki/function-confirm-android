@@ -3,4 +3,6 @@
     <string name="text_sample_test">サンプルテキスト</string>
     <string name="text_fragment_2">Fragment2</string>
     <string name="text_button">ボタン</string>
+    <string name="text_home">ホーム</string>
+    <string name="text_person">プロフィール</string>
 </resources>
