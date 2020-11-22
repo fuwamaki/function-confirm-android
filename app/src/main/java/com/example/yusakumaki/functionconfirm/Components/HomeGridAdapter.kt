@@ -7,11 +7,13 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import com.example.yusakumaki.functionconfirm.Entity.GridItemEntity
 import com.example.yusakumaki.functionconfirm.Entity.gridItems
 import com.example.yusakumaki.functionconfirm.R
 
 class HomeGridAdapter(private val context: Context) : BaseAdapter() {
+
     override fun getCount(): Int {
         return gridItems.size
     }
@@ -30,9 +32,6 @@ class HomeGridAdapter(private val context: Context) : BaseAdapter() {
         val itemImageView = containerView.findViewById<ImageView>(R.id.item_image_view)
         itemImageView.setImageResource(getItem(position).image)
         itemImageView.maxHeight = itemImageView.width
-        val params = itemImageView.layoutParams
-        params.height = itemImageView.width
-        itemImageView.layoutParams = params
         val name = containerView.findViewById<TextView>(R.id.item_text_view)
         name.text = getItem(position).title
         return containerView
