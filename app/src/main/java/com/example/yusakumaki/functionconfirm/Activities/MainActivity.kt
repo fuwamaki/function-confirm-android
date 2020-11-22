@@ -7,7 +7,6 @@ import androidx.navigation.ui.NavigationUI
 import com.example.yusakumaki.functionconfirm.R
 import kotlinx.android.synthetic.main.activity_main.*
 
-
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
