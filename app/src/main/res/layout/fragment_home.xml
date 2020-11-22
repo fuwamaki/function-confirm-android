@@ -11,12 +11,18 @@
         android:background="@color/backgroundPrimary"
         android:transitionName="shared_element_container">
 
-        <TextView
-            android:id="@+id/main_sample_text_view"
+        <GridView
+            android:id="@+id/main_grid_view"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/text_home"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:columnWidth="@dimen/size_120"
+            android:stretchMode="columnWidth"
+            android:drawSelectorOnTop="true"
+            android:horizontalSpacing="@dimen/space_4"
+            android:numColumns="auto_fit"
+            android:padding="@dimen/space_4"
+            android:verticalSpacing="@dimen/space_4" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
