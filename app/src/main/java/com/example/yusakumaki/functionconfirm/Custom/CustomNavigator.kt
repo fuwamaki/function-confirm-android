@@ -8,6 +8,7 @@ import androidx.navigation.NavOptions
 import androidx.navigation.Navigator
 import androidx.navigation.fragment.FragmentNavigator
 
+// memo: BottomNavigationのFragmentを再生成しないように、Fragment状態を保持
 @Navigator.Name("custom_fragment")
 class CustomNavigator(
         private val context: Context,
