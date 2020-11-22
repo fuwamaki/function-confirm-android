@@ -1,4 +1,4 @@
-package com.example.yusakumaki.functionconfirm
+package com.example.yusakumaki.functionconfirm.Fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
+import com.example.yusakumaki.functionconfirm.R
 import com.example.yusakumaki.functionconfirm.databinding.FragmentMainBinding
 import kotlinx.android.synthetic.main.fragment_main.view.*
 

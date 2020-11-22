@@ -12,7 +12,7 @@
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".MainActivity">
+        tools:context=".Activities.MainActivity">
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/top_app_bar"
@@ -31,7 +31,7 @@
 
         <fragment
             android:id="@+id/main_navigation_host"
-            android:name="com.example.yusakumaki.functionconfirm.CustomNavHostFragment"
+            android:name="com.example.yusakumaki.functionconfirm.Custom.CustomNavHostFragment"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:defaultNavHost="true"

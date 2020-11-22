@@ -13,36 +13,12 @@
                       <LayoutPositions />
                     </value>
                   </entry>
-                  <entry key="main_fragment">
-                    <value>
-                      <LayoutPositions>
-                        <option name="myPosition">
-                          <Point>
-                            <option name="x" value="-61" />
-                            <option name="y" value="19" />
-                          </Point>
-                        </option>
-                      </LayoutPositions>
-                    </value>
-                  </entry>
-                  <entry key="second_fragment">
-                    <value>
-                      <LayoutPositions>
-                        <option name="myPosition">
-                          <Point>
-                            <option name="x" value="178" />
-                            <option name="y" value="18" />
-                          </Point>
-                        </option>
-                      </LayoutPositions>
-                    </value>
-                  </entry>
                   <entry key="show_second_fragment">
                     <value>
                       <LayoutPositions />
                     </value>
                   </entry>
-                  <entry key="tab1">
+                  <entry key="tab0">
                     <value>
                       <LayoutPositions>
                         <option name="myPosition">
@@ -54,12 +30,12 @@
                       </LayoutPositions>
                     </value>
                   </entry>
-                  <entry key="tab2">
+                  <entry key="tab1">
                     <value>
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="256" />
+                            <option name="x" value="12" />
                             <option name="y" value="12" />
                           </Point>
                         </option>

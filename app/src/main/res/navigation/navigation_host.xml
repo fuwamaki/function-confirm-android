@@ -4,6 +4,20 @@
     android:id="@+id/navigation_host"
     app:startDestination="@id/tab0">
 
+    <!--custom_fragment-->
+    <custom_fragment
+        android:id="@+id/tab0"
+        android:name="com.example.yusakumaki.functionconfirm.Fragments.HomeFragment"
+        android:label="fragment_home"
+        android:tag="tab0" />
+
+    <custom_fragment
+        android:id="@+id/tab1"
+        android:name="com.example.yusakumaki.functionconfirm.Fragments.ProfileFragment"
+        android:label="fragment_profile"
+        android:tag="tab1" />
+
+    <!--action-->
     <action
         android:id="@+id/show_second_fragment"
         app:destination="@id/tab1" />
@@ -11,17 +25,4 @@
     <action
         android:id="@+id/action_back_to_mainFragment"
         app:destination="@id/tab0" />
-
-    <custom_fragment
-        android:id="@+id/tab0"
-        android:name="com.example.yusakumaki.functionconfirm.MainFragment"
-        android:label="fragment_first"
-        android:tag="tab0" />
-
-    <custom_fragment
-        android:id="@+id/tab1"
-        android:name="com.example.yusakumaki.functionconfirm.SecondFragment"
-        android:label="fragment_second"
-        android:tag="tab1" />
-
 </navigation>

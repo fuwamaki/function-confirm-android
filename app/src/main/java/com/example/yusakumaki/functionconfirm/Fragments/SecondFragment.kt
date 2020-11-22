@@ -1,10 +1,11 @@
-package com.example.yusakumaki.functionconfirm
+package com.example.yusakumaki.functionconfirm.Fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.example.yusakumaki.functionconfirm.R
 import com.google.android.material.transition.MaterialContainerTransform
 
 class SecondFragment : Fragment() {

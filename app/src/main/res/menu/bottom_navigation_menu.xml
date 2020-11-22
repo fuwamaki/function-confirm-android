@@ -9,5 +9,5 @@
         android:id="@+id/tab1"
         android:enabled="true"
         android:icon="@drawable/ic_baseline_person_24"
-        android:title="@string/text_person" />
+        android:title="@string/text_profile" />
 </menu>

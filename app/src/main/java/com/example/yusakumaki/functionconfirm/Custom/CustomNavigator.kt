@@ -1,25 +1,12 @@
-package com.example.yusakumaki.functionconfirm
+package com.example.yusakumaki.functionconfirm.Custom
 
 import android.content.Context
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
-import androidx.navigation.*
+import androidx.navigation.NavDestination
+import androidx.navigation.NavOptions
+import androidx.navigation.Navigator
 import androidx.navigation.fragment.FragmentNavigator
-import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.NavigationUI
-import kotlinx.android.synthetic.main.activity_main.*
-
-
-class MainActivity : AppCompatActivity() {
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        val navController = findNavController(R.id.main_navigation_host)
-        NavigationUI.setupWithNavController(bottom_navigation, navController)
-    }
-}
 
 @Navigator.Name("custom_fragment")
 class CustomNavigator(
@@ -64,11 +51,5 @@ class CustomNavigator(
         transaction.commit()
 
         return destination
-    }
-}
-
-class CustomNavHostFragment : NavHostFragment() {
-    override fun createFragmentNavigator(): Navigator<out FragmentNavigator.Destination> {
-        return CustomNavigator(requireContext(), childFragmentManager, id)
     }
 }
