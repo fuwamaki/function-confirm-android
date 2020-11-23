@@ -9,8 +9,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/backgroundPrimary"
-        android:transitionName="shared_element_container">
+        android:transitionName="shared_element_container"
+        android:background="@color/backgroundPrimary">
 
         <GridView
             android:id="@+id/main_grid_view"

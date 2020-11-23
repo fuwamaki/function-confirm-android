@@ -1,16 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/second_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/second_container"
     android:transitionName="shared_element_container"
     android:background="@color/backgroundSecondary">
 
+    <ImageView
+        android:id="@+id/second_image_view"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:contentDescription="@null"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_visual_data_cuate"
+        android:transitionName="shared_element_image_view"
+        app:layout_constraintDimensionRatio="H,1:1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
+        android:id="@+id/item_text_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/text_fragment_2"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:text="タイトル2"
+        app:layout_constraintTop_toBottomOf="@id/second_image_view" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

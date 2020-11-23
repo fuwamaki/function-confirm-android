@@ -17,10 +17,28 @@
         android:label="fragment_profile"
         android:tag="tab1" />
 
+    <custom_fragment
+        android:id="@+id/nav_second_fragment"
+        android:name="com.example.yusakumaki.functionconfirm.Fragments.SecondFragment"
+        android:label="fragment_second"
+        android:tag="tag_second_fragment" />
+
+    <custom_fragment
+        android:id="@+id/nav_main_fragment"
+        android:name="com.example.yusakumaki.functionconfirm.Fragments.MainFragment"
+        android:label="fragment_main"
+        android:tag="tag_main_fragment" >
+    </custom_fragment>
+
     <!--action-->
+
     <action
         android:id="@+id/show_second_fragment"
-        app:destination="@id/tab1" />
+        app:destination="@id/nav_second_fragment" />
+
+    <action
+        android:id="@+id/show_main_fragment"
+        app:destination="@id/nav_main_fragment" />
 
     <action
         android:id="@+id/action_back_to_mainFragment"
