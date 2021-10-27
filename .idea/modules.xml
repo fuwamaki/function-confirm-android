@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/android_function_confirm.iml" filepath="$PROJECT_DIR$/.idea/modules/android_function_confirm.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/android_function_confirm.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/android_function_confirm.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/android_function_confirm.iml" filepath="$PROJECT_DIR$/.idea/android_function_confirm.iml" />
     </modules>
   </component>
 </project>
