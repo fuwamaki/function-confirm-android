@@ -27,12 +27,12 @@ class HomeFragment : Fragment() {
         binding.mainGridView.numColumns = 2
         binding.mainGridView.horizontalSpacing = 1
         binding.mainGridView.verticalSpacing = 1
-//        binding.mainGridView.setOnItemClickListener { parent, view, position, id ->
-//            val imageView = view.findViewById<ImageView>(R.id.item_image_view)
-//            Toast.makeText(context, "fragment: click:" + gridItems[position].title, Toast.LENGTH_SHORT).show()
-//            val extras = FragmentNavigatorExtras(imageView to "shared_element_image_view")
-//            findNavController().navigate(R.id.show_second_fragment, null, null, extras)
-//        }
+        binding.mainGridView.setOnItemClickListener { _, view, position, _ ->
+            val imageView = view.findViewById<ImageView>(R.id.item_image_view)
+            Toast.makeText(context, "fragment: click:" + gridItems[position].title, Toast.LENGTH_SHORT).show()
+            val extras = FragmentNavigatorExtras(imageView to "shared_element_image_view")
+            findNavController().navigate(R.id.show_second_fragment, null, null, extras)
+        }
         exitTransition = MaterialElevationScale(true)
         return binding.root
     }
