@@ -1,4 +1,10 @@
-package com.example.yusakumaki.functionconfirm.Fragments
+package com.example.yusakumaki.functionconfirm.fragments
 
-class ProfileViewModel {
+import android.util.Log
+import androidx.lifecycle.ViewModel
+
+class ProfileViewModel: ViewModel() {
+    fun onAction() {
+        Log.v("", "test")
+    }
 }
