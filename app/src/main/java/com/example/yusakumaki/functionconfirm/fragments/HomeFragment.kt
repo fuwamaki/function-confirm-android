@@ -1,4 +1,4 @@
-package com.example.yusakumaki.functionconfirm.Fragments
+package com.example.yusakumaki.functionconfirm.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,8 +9,8 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
-import com.example.yusakumaki.functionconfirm.Components.HomeGridAdapter
-import com.example.yusakumaki.functionconfirm.Entity.gridItems
+import com.example.yusakumaki.functionconfirm.components.HomeGridAdapter
+import com.example.yusakumaki.functionconfirm.entity.gridItems
 import com.example.yusakumaki.functionconfirm.R
 import com.example.yusakumaki.functionconfirm.databinding.FragmentHomeBinding
 import com.google.android.material.transition.MaterialElevationScale

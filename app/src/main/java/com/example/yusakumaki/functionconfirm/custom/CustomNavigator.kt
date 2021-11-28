@@ -1,4 +1,4 @@
-package com.example.yusakumaki.functionconfirm.Custom
+package com.example.yusakumaki.functionconfirm.custom
 
 import android.content.Context
 import android.os.Bundle

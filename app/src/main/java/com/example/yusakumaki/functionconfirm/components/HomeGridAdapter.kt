@@ -1,4 +1,4 @@
-package com.example.yusakumaki.functionconfirm.Components
+package com.example.yusakumaki.functionconfirm.components
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -7,9 +7,8 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
-import com.example.yusakumaki.functionconfirm.Entity.GridItemEntity
-import com.example.yusakumaki.functionconfirm.Entity.gridItems
+import com.example.yusakumaki.functionconfirm.entity.GridItemEntity
+import com.example.yusakumaki.functionconfirm.entity.gridItems
 import com.example.yusakumaki.functionconfirm.R
 
 class HomeGridAdapter(private val context: Context) : BaseAdapter() {

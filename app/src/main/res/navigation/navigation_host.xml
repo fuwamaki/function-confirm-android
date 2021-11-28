@@ -7,25 +7,25 @@
     <!--custom_fragment-->
     <custom_fragment
         android:id="@+id/tab0"
-        android:name="com.example.yusakumaki.functionconfirm.Fragments.HomeFragment"
+        android:name="com.example.yusakumaki.functionconfirm.fragments.HomeFragment"
         android:label="fragment_home"
         android:tag="tab0" />
 
     <custom_fragment
         android:id="@+id/tab1"
-        android:name="com.example.yusakumaki.functionconfirm.Fragments.ProfileFragment"
+        android:name="com.example.yusakumaki.functionconfirm.fragments.ProfileFragment"
         android:label="fragment_profile"
         android:tag="tab1" />
 
     <custom_fragment
         android:id="@+id/nav_second_fragment"
-        android:name="com.example.yusakumaki.functionconfirm.Fragments.SecondFragment"
+        android:name="com.example.yusakumaki.functionconfirm.fragments.SecondFragment"
         android:label="fragment_second"
         android:tag="tag_second_fragment" />
 
     <custom_fragment
         android:id="@+id/nav_main_fragment"
-        android:name="com.example.yusakumaki.functionconfirm.Fragments.MainFragment"
+        android:name="com.example.yusakumaki.functionconfirm.fragments.MainFragment"
         android:label="fragment_main"
         android:tag="tag_main_fragment" >
     </custom_fragment>

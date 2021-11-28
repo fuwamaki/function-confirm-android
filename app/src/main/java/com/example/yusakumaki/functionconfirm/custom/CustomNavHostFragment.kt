@@ -1,4 +1,4 @@
-package com.example.yusakumaki.functionconfirm.Custom
+package com.example.yusakumaki.functionconfirm.custom
 
 import androidx.navigation.Navigator
 import androidx.navigation.fragment.FragmentNavigator

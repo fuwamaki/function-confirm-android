@@ -1,4 +1,4 @@
-package com.example.yusakumaki.functionconfirm.Entity
+package com.example.yusakumaki.functionconfirm.entity
 
 import com.example.yusakumaki.functionconfirm.R
 

@@ -1,4 +1,4 @@
-package com.example.yusakumaki.functionconfirm.Fragments
+package com.example.yusakumaki.functionconfirm.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater

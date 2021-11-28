@@ -1,4 +1,4 @@
-package com.example.yusakumaki.functionconfirm.Activities
+package com.example.yusakumaki.functionconfirm.activities
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
