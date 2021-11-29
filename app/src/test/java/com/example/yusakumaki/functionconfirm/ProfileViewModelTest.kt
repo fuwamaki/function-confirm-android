@@ -21,7 +21,7 @@ class ProfileViewModelTest {
     fun testOnAction() {
         val viewModel = ProfileViewModel()
         val observer = mock<Observer<Unit>>()
-        viewModel.actionEvent.observeForever(observer)
+        viewModel.state.observeForever(observer)
         viewModel.onAction()
         verify(observer)
                 .onChanged(Unit)

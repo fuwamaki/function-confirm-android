@@ -18,17 +18,22 @@ class ProfileFragment : Fragment() {
         ViewModelProvider.NewInstanceFactory().create(ProfileViewModel::class.java)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         super.onCreateView(inflater, container, savedInstanceState)
         binding = FragmentProfileBinding.inflate(inflater, container, false)
         binding.viewModel = viewModel
         val needsStrikeThrough = true
         binding.sampleTextView.apply {
-            paint.flags = if (needsStrikeThrough) paintFlags or Paint.STRIKE_THRU_TEXT_FLAG else Paint.ANTI_ALIAS_FLAG
+            paint.flags =
+                if (needsStrikeThrough) paintFlags or Paint.STRIKE_THRU_TEXT_FLAG else Paint.ANTI_ALIAS_FLAG
             paint.isAntiAlias = needsStrikeThrough
             invalidate() // 再描画
         }
-        viewModel.actionEvent.observe(this, {
+        viewModel.state.observe(viewLifecycleOwner, {
             Toast.makeText(context, "tap action", Toast.LENGTH_SHORT).show()
         })
         return binding.root
