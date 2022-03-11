@@ -20,7 +20,8 @@ class ProfileFragment : Fragment() {
     private lateinit var binding: FragmentProfileBinding
 
     private val viewModel: ProfileViewModel by lazy {
-        ViewModelProvider.NewInstanceFactory().create(ProfileViewModel::class.java)
+//        ViewModelProvider.NewInstanceFactory().create(ProfileViewModel::class.java)
+        ViewModelProvider(this).get(ProfileViewModel::class.java)
     }
 
     override fun onCreateView(
