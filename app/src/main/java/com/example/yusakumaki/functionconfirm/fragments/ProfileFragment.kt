@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.PopupMenu
 import android.widget.Spinner
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -62,6 +63,20 @@ class ProfileFragment : Fragment() {
 
                 override fun onNothingSelected(parent: AdapterView<*>?) {}
             }
+        binding.sampleImage.setOnClickListener {
+            val popupMenu = PopupMenu(context, it)
+            popupMenu.setOnMenuItemClickListener { item ->
+                when (item.itemId) {
+                    R.id.sample_item_menu -> {
+                        Toast.makeText(context, "tap", Toast.LENGTH_SHORT).show()
+                        true
+                    }
+                    else -> false
+                }
+            }
+            popupMenu.inflate(R.menu.sample_menu)
+            popupMenu.show()
+        }
         return binding.root
     }
 }

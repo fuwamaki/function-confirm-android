@@ -44,9 +44,18 @@
             android:id="@+id/sample_spinner"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:backgroundTint="@color/peach"
+            android:layout_marginHorizontal="@dimen/space_24"
             android:layout_marginTop="@dimen/space_48"
-            android:layout_marginHorizontal="@dimen/space_24" />
+            android:backgroundTint="@color/peach" />
+
+        <ImageView
+            android:id="@+id/sample_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/space_24"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_baseline_person_24" />
+
 
     </LinearLayout>
 
