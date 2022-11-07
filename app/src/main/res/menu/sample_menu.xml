@@ -3,6 +3,5 @@
     <item
         android:id="@+id/sample_item_menu"
         android:enabled="true"
-        android:icon="@drawable/ic_baseline_home_24"
         android:title="@string/text_sample" />
 </menu>
