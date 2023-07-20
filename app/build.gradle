@@ -3,11 +3,12 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion 31
+    namespace 'com.example.yusakumaki.functionconfirm'
+    compileSdkVersion 33
     defaultConfig {
         applicationId "com.example.yusakumaki.functionconfirm"
         minSdkVersion 23
-        targetSdkVersion 31
+        targetSdkVersion 33
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
@@ -22,29 +23,29 @@ android {
         enabled true
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'androidx.appcompat:appcompat:1.4.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.2'
-    implementation "androidx.navigation:navigation-fragment-ktx:2.3.5"
-    implementation "androidx.navigation:navigation-ui-ktx:2.3.5"
-    implementation "com.google.android.material:material:1.4.0"
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation "androidx.navigation:navigation-fragment-ktx:2.6.0"
+    implementation "androidx.navigation:navigation-ui-ktx:2.6.0"
+    implementation "com.google.android.material:material:1.9.0"
     implementation "com.github.hadilq:live-event:1.3.0"
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.4.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test:runner:1.5.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
-    testImplementation 'junit:junit:4.12'
-    testImplementation 'androidx.test:core:1.4.0'
-    testImplementation 'androidx.test.ext:junit:1.1.3'
+    testImplementation 'junit:junit:4.13.2'
+    testImplementation 'androidx.test:core:1.5.0'
+    testImplementation 'androidx.test.ext:junit:1.1.5'
     //noinspection GradleDependency
     testImplementation 'org.robolectric:robolectric:4.5'
     testImplementation "org.mockito.kotlin:mockito-kotlin:4.0.0"
-    testImplementation 'org.mockito:mockito-inline:4.0.0'
+    testImplementation 'org.mockito:mockito-inline:4.6.1'
 }
