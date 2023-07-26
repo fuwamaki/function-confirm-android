@@ -1,7 +1,11 @@
 package com.example.yusakumaki.functionconfirm.fragments
 
+import android.app.Activity
+import android.content.Intent
 import android.graphics.Paint
+import android.net.Uri
 import android.os.Bundle
+import android.provider.Settings
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -11,10 +15,12 @@ import android.widget.ArrayAdapter
 import android.widget.PopupMenu
 import android.widget.Spinner
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.yusakumaki.functionconfirm.R
 import com.example.yusakumaki.functionconfirm.databinding.FragmentProfileBinding
+import com.example.yusakumaki.functionconfirm.helper.StepCountHelper
 
 class ProfileFragment : Fragment() {
 
@@ -33,6 +39,9 @@ class ProfileFragment : Fragment() {
         super.onCreateView(inflater, container, savedInstanceState)
         binding = FragmentProfileBinding.inflate(inflater, container, false)
         binding.viewModel = viewModel
+        binding.lifecycleOwner = this
+
+        viewModel.updatePermission()
         val needsStrikeThrough = true
         binding.sampleTextView.apply {
             paint.flags =
@@ -42,6 +51,22 @@ class ProfileFragment : Fragment() {
         }
         viewModel.state.observe(viewLifecycleOwner) {
             Toast.makeText(context, "tap action", Toast.LENGTH_SHORT).show()
+        }
+        viewModel.checkGoogleSignIn.observe(viewLifecycleOwner) {
+            StepCountHelper.checkGoogleSignIn(this) {
+                StepCountHelper.checkActivityPermission(requireActivity()) {
+                    Toast.makeText(context, "checkGoogleFitPermission", Toast.LENGTH_SHORT).show()
+                    viewModel.updatePermission()
+                }
+            }
+        }
+        viewModel.openSettingEvent.observe(viewLifecycleOwner) {
+            val uriString = "package:${requireContext().packageName}"
+            val intent = Intent(
+                Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
+                Uri.parse(uriString)
+            )
+            startActivity(intent)
         }
         val adapter = ArrayAdapter(
             requireContext(),
@@ -78,5 +103,19 @@ class ProfileFragment : Fragment() {
             popupMenu.show()
         }
         return binding.root
+    }
+
+    @Suppress("DEPRECATION", "OVERRIDE_DEPRECATION")
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == StepCountHelper.GOOGLE_SIGN_IN_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
+            StepCountHelper.checkActivityPermission(requireActivity()) {
+                Toast.makeText(context, "checkGoogleFitPermission", Toast.LENGTH_SHORT).show()
+                viewModel.updatePermission()
+            }
+        } else if (requestCode == StepCountHelper.GOOGLE_FIT_PERMISSION_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
+            Toast.makeText(context, "googleFitResultLauncher", Toast.LENGTH_SHORT).show()
+            viewModel.updatePermission()
+        }
     }
 }

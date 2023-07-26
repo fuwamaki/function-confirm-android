@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -56,6 +57,57 @@
             android:contentDescription="@null"
             android:src="@drawable/ic_baseline_person_24" />
 
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/size_40"
+            android:layout_marginStart="@dimen/space_32"
+            android:layout_marginTop="@dimen/space_32"
+            android:onClick="@{() -> viewModel.requestStepCountPermission()}"
+            android:text="@string/text_request_step_count_permission" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/space_32"
+            android:text="@{viewModel.permissionState}"
+            tools:text="@string/text_allow" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/size_40"
+            android:layout_marginStart="@dimen/space_32"
+            android:layout_marginTop="@dimen/space_8"
+            android:onClick="@{() -> viewModel.segueToSetting()}"
+            android:text="@string/text_segue_application_setting" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_8"
+            android:orientation="horizontal">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/size_40"
+                android:layout_marginStart="@dimen/space_32"
+                android:onClick="@{() -> viewModel.updateStepCount()}"
+                android:text="@string/text_update_step_count" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/space_32"
+                android:text="@{viewModel.stepCountText}"
+                tools:text="0" />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/space_32"
+            android:text="@{viewModel.googleFitAppState}"
+            tools:text="@string/text_have_google_fit" />
 
     </LinearLayout>
 
