@@ -15,4 +15,5 @@
     <string name="text_update_step_count">歩数を取得</string>
     <string name="text_advertising_id">ADID</string>
     <string name="text_ip_address">Local IP Address</string>
+    <string name="text_wifi_info">Wifi情報</string>
 </resources>

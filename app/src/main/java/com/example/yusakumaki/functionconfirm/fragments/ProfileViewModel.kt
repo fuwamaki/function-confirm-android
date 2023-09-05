@@ -6,7 +6,14 @@ import android.content.Context.CONNECTIVITY_SERVICE
 import android.net.ConnectivityManager
 import android.net.LinkProperties
 import android.net.Network
+import android.net.NetworkCapabilities
+import android.net.NetworkCapabilities.TRANSPORT_WIFI
+import android.net.NetworkRequest
+import android.net.wifi.WifiInfo
+import android.net.wifi.WifiManager
+import android.os.Build
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -54,6 +61,12 @@ class ProfileViewModel(application: Application) : AndroidViewModel(application)
 
     private val _localIPAddress = MutableLiveData("")
     val localIPAddress: LiveData<String> = _localIPAddress
+
+    private val _ssid = MutableLiveData("")
+    val ssid: LiveData<String> = _ssid
+
+    private val _bssid = MutableLiveData("")
+    val bssid: LiveData<String> = _bssid
 
     fun updatePermission() {
         _permissionState.postValue(
@@ -131,5 +144,44 @@ class ProfileViewModel(application: Application) : AndroidViewModel(application)
             }
         }
         manager.registerDefaultNetworkCallback(networkCallback)
+    }
+
+    fun requestWifiInfo() {
+        // TODO: 位置情報のリクエスト
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            val manager = context.getSystemService(CONNECTIVITY_SERVICE) as ConnectivityManager
+            requestNetworkCapability(manager)
+        } else {
+            val manager = context.applicationContext.getSystemService(Context.WIFI_SERVICE) as WifiManager
+            val info: WifiInfo = manager.connectionInfo
+            _ssid.postValue(info.ssid)
+            _bssid.postValue(info.bssid)
+        }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.S)
+    private fun requestNetworkCapability(manager: ConnectivityManager) {
+        val request = NetworkRequest.Builder()
+            .addTransportType(TRANSPORT_WIFI)
+            .build()
+
+        // FLAG_INCLUDE_LOCATION_INFOを指定しないとWifiInfoが取得できない
+        val callback = object : ConnectivityManager.NetworkCallback(FLAG_INCLUDE_LOCATION_INFO) {
+            override fun onCapabilitiesChanged(network: Network, networkCapabilities: NetworkCapabilities) {
+                super.onCapabilitiesChanged(network, networkCapabilities)
+                val wifi = (networkCapabilities.transportInfo as? WifiInfo) ?: return@onCapabilitiesChanged
+                _ssid.postValue(wifi.ssid)
+                _bssid.postValue(wifi.bssid)
+            }
+
+            override fun onAvailable(network: Network) {
+                super.onAvailable(network)
+                val wifi = (manager.getNetworkCapabilities(network)?.transportInfo as? WifiInfo) ?: return@onAvailable
+                _ssid.postValue(wifi.ssid)
+                _bssid.postValue(wifi.bssid)
+            }
+        }
+        manager.registerNetworkCallback(request, callback)
+        manager.requestNetwork(request, callback)
     }
 }
