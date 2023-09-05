@@ -6,7 +6,6 @@ import android.graphics.Paint
 import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,12 +14,12 @@ import android.widget.ArrayAdapter
 import android.widget.PopupMenu
 import android.widget.Spinner
 import android.widget.Toast
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.yusakumaki.functionconfirm.R
 import com.example.yusakumaki.functionconfirm.databinding.FragmentProfileBinding
 import com.example.yusakumaki.functionconfirm.helper.StepCountHelper
+import timber.log.Timber
 
 class ProfileFragment : Fragment() {
 
@@ -42,6 +41,8 @@ class ProfileFragment : Fragment() {
         binding.lifecycleOwner = this
 
         viewModel.updatePermission()
+        viewModel.requestAdvertisingId()
+
         val needsStrikeThrough = true
         binding.sampleTextView.apply {
             paint.flags =
@@ -83,7 +84,7 @@ class ProfileFragment : Fragment() {
                     id: Long
                 ) {
                     val item = (parent as Spinner).selectedItem as Int
-                    Log.v("tag", item.toString())
+                    Timber.d("item: $item")
                 }
 
                 override fun onNothingSelected(parent: AdapterView<*>?) {}

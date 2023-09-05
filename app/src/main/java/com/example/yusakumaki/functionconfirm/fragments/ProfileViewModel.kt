@@ -9,7 +9,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.yusakumaki.functionconfirm.R
 import com.example.yusakumaki.functionconfirm.helper.StepCountHelper
+import com.google.android.gms.ads.identifier.AdvertisingIdClient
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException
+import com.google.android.gms.common.GooglePlayServicesRepairableException
 import com.hadilq.liveevent.LiveEvent
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.flow
@@ -38,6 +42,9 @@ class ProfileViewModel(application: Application) : AndroidViewModel(application)
 
     private val _googleFitAppState = MutableLiveData("")
     val googleFitAppState: LiveData<String> = _googleFitAppState
+
+    private val _advertisingId = MutableLiveData("")
+    val advertisingId: LiveData<String> = _advertisingId
 
     fun updatePermission() {
         _permissionState.postValue(
@@ -84,5 +91,25 @@ class ProfileViewModel(application: Application) : AndroidViewModel(application)
             Timber.v("collectLatest: $it")
             _stepCountText.postValue(it.toString())
         }
+    }
+
+    fun requestAdvertisingId() {
+        GlobalScope.launch {
+            try {
+                val info = AdvertisingIdClient.getAdvertisingIdInfo(context)
+                if (!info.isLimitAdTrackingEnabled) {
+                    _advertisingId.postValue(info.id)
+                } else {
+                    Timber.d("isLimitAdTrackingEnabled: true")
+                }
+            } catch (e: GooglePlayServicesNotAvailableException) {
+                Timber.d(e)
+            } catch (e: GooglePlayServicesRepairableException) {
+                Timber.d(e)
+            }
+        }
+    }
+    private fun updateFeasibility() {
+
     }
 }

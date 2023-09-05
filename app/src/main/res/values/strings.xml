@@ -13,4 +13,5 @@
     <string name="text_request_step_count_permission">Google Fitと身体活動 権限リクエスト</string>
     <string name="text_segue_application_setting">設定画面へ</string>
     <string name="text_update_step_count">歩数を取得</string>
+    <string name="text_advertising_id">ADID</string>
 </resources>
