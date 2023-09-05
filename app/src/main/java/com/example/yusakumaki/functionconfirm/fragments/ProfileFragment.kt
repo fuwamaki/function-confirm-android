@@ -42,6 +42,7 @@ class ProfileFragment : Fragment() {
 
         viewModel.updatePermission()
         viewModel.requestAdvertisingId()
+        viewModel.updateFeasibility()
 
         val needsStrikeThrough = true
         binding.sampleTextView.apply {

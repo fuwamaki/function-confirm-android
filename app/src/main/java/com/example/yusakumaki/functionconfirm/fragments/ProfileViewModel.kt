@@ -2,6 +2,10 @@ package com.example.yusakumaki.functionconfirm.fragments
 
 import android.app.Application
 import android.content.Context
+import android.content.Context.CONNECTIVITY_SERVICE
+import android.net.ConnectivityManager
+import android.net.LinkProperties
+import android.net.Network
 import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
@@ -13,12 +17,14 @@ import com.google.android.gms.ads.identifier.AdvertisingIdClient
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException
 import com.google.android.gms.common.GooglePlayServicesRepairableException
 import com.hadilq.liveevent.LiveEvent
+import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import timber.log.Timber
+import java.net.Inet4Address
 
 val AndroidViewModel.context: Context
     get() = getApplication()
@@ -45,6 +51,9 @@ class ProfileViewModel(application: Application) : AndroidViewModel(application)
 
     private val _advertisingId = MutableLiveData("")
     val advertisingId: LiveData<String> = _advertisingId
+
+    private val _localIPAddress = MutableLiveData("")
+    val localIPAddress: LiveData<String> = _localIPAddress
 
     fun updatePermission() {
         _permissionState.postValue(
@@ -93,6 +102,7 @@ class ProfileViewModel(application: Application) : AndroidViewModel(application)
         }
     }
 
+    @OptIn(DelicateCoroutinesApi::class)
     fun requestAdvertisingId() {
         GlobalScope.launch {
             try {
@@ -109,7 +119,17 @@ class ProfileViewModel(application: Application) : AndroidViewModel(application)
             }
         }
     }
-    private fun updateFeasibility() {
-
+    fun updateFeasibility() {
+        val manager: ConnectivityManager =
+            context.getSystemService(CONNECTIVITY_SERVICE) as ConnectivityManager
+        val networkCallback = object : ConnectivityManager.NetworkCallback() {
+            override fun onLinkPropertiesChanged(network: Network, linkProperties: LinkProperties) {
+                super.onLinkPropertiesChanged(network, linkProperties)
+                val value = linkProperties.linkAddresses.firstOrNull { it.address is Inet4Address }
+                    .toString()
+                _localIPAddress.postValue(value)
+            }
+        }
+        manager.registerDefaultNetworkCallback(networkCallback)
     }
 }
