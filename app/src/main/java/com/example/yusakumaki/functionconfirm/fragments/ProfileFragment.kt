@@ -42,7 +42,8 @@ class ProfileFragment : Fragment() {
 
         viewModel.updatePermission()
         viewModel.requestAdvertisingId()
-        viewModel.updateFeasibility()
+        viewModel.fetchGlobalIPAddress()
+        viewModel.fetchLocalIPAddress()
         viewModel.requestWifiInfo()
 
         val needsStrikeThrough = true

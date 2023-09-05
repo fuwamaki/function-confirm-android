@@ -27,7 +27,7 @@
             android:layout_width="wrap_content"
             android:layout_height="@dimen/size_40"
             android:layout_marginStart="@dimen/space_32"
-            android:layout_marginTop="@dimen/space_32"
+            android:layout_marginTop="@dimen/space_8"
             android:onClick="@{() -> viewModel.onAction()}"
             android:text="@string/text_sample_test" />
 
@@ -53,7 +53,7 @@
             android:id="@+id/sample_image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/space_24"
+            android:layout_margin="@dimen/space_4"
             android:contentDescription="@null"
             android:src="@drawable/ic_baseline_person_24" />
 
@@ -131,7 +131,24 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/space_32"
             android:layout_marginTop="@dimen/space_16"
-            android:text="@string/text_ip_address"
+            android:text="@string/text_global_ip_address"
+            android:textColor="@color/textPrimary"
+            android:textSize="20sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/space_32"
+            android:layout_marginTop="@dimen/space_8"
+            android:text="@{viewModel.globalIPAddress}"
+            tools:text="value" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/space_32"
+            android:layout_marginTop="@dimen/space_16"
+            android:text="@string/text_local_ip_address"
             android:textColor="@color/textPrimary"
             android:textSize="20sp" />
 

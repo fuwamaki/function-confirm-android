@@ -25,11 +25,15 @@ import com.google.android.gms.common.GooglePlayServicesNotAvailableException
 import com.google.android.gms.common.GooglePlayServicesRepairableException
 import com.hadilq.liveevent.LiveEvent
 import kotlinx.coroutines.DelicateCoroutinesApi
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import okhttp3.OkHttpClient
+import okhttp3.Request
 import timber.log.Timber
 import java.net.Inet4Address
 
@@ -59,6 +63,9 @@ class ProfileViewModel(application: Application) : AndroidViewModel(application)
     private val _advertisingId = MutableLiveData("")
     val advertisingId: LiveData<String> = _advertisingId
 
+    private val _globalIPAddress = MutableLiveData("")
+    val globalIPAddress: LiveData<String> = _globalIPAddress
+
     private val _localIPAddress = MutableLiveData("")
     val localIPAddress: LiveData<String> = _localIPAddress
 
@@ -67,6 +74,8 @@ class ProfileViewModel(application: Application) : AndroidViewModel(application)
 
     private val _bssid = MutableLiveData("")
     val bssid: LiveData<String> = _bssid
+
+    private val okHttpClient = OkHttpClient.Builder().build()
 
     fun updatePermission() {
         _permissionState.postValue(
@@ -132,7 +141,26 @@ class ProfileViewModel(application: Application) : AndroidViewModel(application)
             }
         }
     }
-    fun updateFeasibility() {
+
+    fun fetchGlobalIPAddress() {
+        viewModelScope.launch {
+            val request = Request.Builder()
+                .url("https://icanhazip.com/")
+                .build()
+            val result = withContext(Dispatchers.IO) {
+                okHttpClient.newCall(request).execute().use { response ->
+                    if (response.isSuccessful) {
+                        response.body?.string()
+                    } else {
+                        "failed/ code: ${response.code} / message: ${response.message}"
+                    }
+                }
+            }
+            _globalIPAddress.postValue(result?.replace("[\n\r]".toRegex(), ""))
+        }
+    }
+
+    fun fetchLocalIPAddress() {
         val manager: ConnectivityManager =
             context.getSystemService(CONNECTIVITY_SERVICE) as ConnectivityManager
         val networkCallback = object : ConnectivityManager.NetworkCallback() {
