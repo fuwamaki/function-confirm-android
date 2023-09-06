@@ -10,181 +10,188 @@
             type="com.example.yusakumaki.functionconfirm.fragments.ProfileViewModel" />
     </data>
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/backgroundPrimary"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/main_sample_text_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/text_profile"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/size_40"
-            android:layout_marginStart="@dimen/space_32"
-            android:layout_marginTop="@dimen/space_8"
-            android:onClick="@{() -> viewModel.onAction()}"
-            android:text="@string/text_sample_test" />
-
-        <TextView
-            android:id="@+id/sample_text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/space_24"
-            android:layout_marginTop="@dimen/space_24"
-            android:text="@string/text_sample_test"
-            android:textColor="@color/lemon"
-            android:textSize="20sp" />
-
-        <Spinner
-            android:id="@+id/sample_spinner"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginHorizontal="@dimen/space_24"
-            android:layout_marginTop="@dimen/space_16"
-            android:backgroundTint="@color/peach" />
-
-        <ImageView
-            android:id="@+id/sample_image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/space_4"
-            android:contentDescription="@null"
-            android:src="@drawable/ic_baseline_person_24" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/size_40"
-            android:layout_marginStart="@dimen/space_32"
-            android:layout_marginTop="@dimen/space_16"
-            android:onClick="@{() -> viewModel.requestStepCountPermission()}"
-            android:text="@string/text_request_step_count_permission" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/space_32"
-            android:text="@{viewModel.permissionState}"
-            tools:text="@string/text_allow" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/size_40"
-            android:layout_marginStart="@dimen/space_32"
-            android:layout_marginTop="@dimen/space_8"
-            android:onClick="@{() -> viewModel.segueToSetting()}"
-            android:text="@string/text_segue_application_setting" />
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/space_8"
-            android:orientation="horizontal">
+            android:background="@color/backgroundPrimary"
+            android:orientation="vertical"
+            android:paddingVertical="@dimen/space_16">
+
+            <TextView
+                android:id="@+id/main_sample_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/text_profile"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/size_40"
                 android:layout_marginStart="@dimen/space_32"
-                android:onClick="@{() -> viewModel.updateStepCount()}"
-                android:text="@string/text_update_step_count" />
+                android:layout_marginTop="@dimen/space_8"
+                android:onClick="@{() -> viewModel.onAction()}"
+                android:text="@string/text_sample_test" />
+
+            <TextView
+                android:id="@+id/sample_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/space_24"
+                android:layout_marginTop="@dimen/space_24"
+                android:text="@string/text_sample_test"
+                android:textColor="@color/lemon"
+                android:textSize="20sp" />
+
+            <Spinner
+                android:id="@+id/sample_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginHorizontal="@dimen/space_24"
+                android:layout_marginTop="@dimen/space_16"
+                android:backgroundTint="@color/peach" />
+
+            <ImageView
+                android:id="@+id/sample_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/space_4"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_baseline_person_24" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/size_40"
+                android:layout_marginStart="@dimen/space_32"
+                android:layout_marginTop="@dimen/space_16"
+                android:onClick="@{() -> viewModel.requestStepCountPermission()}"
+                android:text="@string/text_request_step_count_permission" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/space_32"
-                android:text="@{viewModel.stepCountText}"
-                tools:text="0" />
+                android:text="@{viewModel.permissionState}"
+                tools:text="@string/text_allow" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/size_40"
+                android:layout_marginStart="@dimen/space_32"
+                android:layout_marginTop="@dimen/space_8"
+                android:onClick="@{() -> viewModel.segueToSetting()}"
+                android:text="@string/text_segue_application_setting" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_8"
+                android:orientation="horizontal">
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/size_40"
+                    android:layout_marginStart="@dimen/space_32"
+                    android:onClick="@{() -> viewModel.updateStepCount()}"
+                    android:text="@string/text_update_step_count" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/space_32"
+                    android:text="@{viewModel.stepCountText}"
+                    tools:text="0" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/space_32"
+                android:text="@{viewModel.googleFitAppState}"
+                tools:text="@string/text_have_google_fit" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/space_32"
+                android:layout_marginTop="@dimen/space_16"
+                android:text="@string/text_advertising_id"
+                android:textColor="@color/textPrimary"
+                android:textSize="20sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/space_32"
+                android:layout_marginTop="@dimen/space_8"
+                android:text="@{viewModel.advertisingId}"
+                tools:text="value" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/space_32"
+                android:layout_marginTop="@dimen/space_16"
+                android:text="@string/text_global_ip_address"
+                android:textColor="@color/textPrimary"
+                android:textSize="20sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/space_32"
+                android:layout_marginTop="@dimen/space_8"
+                android:text="@{viewModel.globalIPAddress}"
+                tools:text="value" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/space_32"
+                android:layout_marginTop="@dimen/space_16"
+                android:text="@string/text_local_ip_address"
+                android:textColor="@color/textPrimary"
+                android:textSize="20sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/space_32"
+                android:layout_marginTop="@dimen/space_8"
+                android:text="@{viewModel.localIPAddress}"
+                tools:text="value" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/space_32"
+                android:layout_marginTop="@dimen/space_16"
+                android:text="@string/text_wifi_info"
+                android:textColor="@color/textPrimary"
+                android:textSize="20sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/space_32"
+                android:layout_marginTop="@dimen/space_8"
+                android:text="@{viewModel.ssid}"
+                tools:text="value" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/space_32"
+                android:layout_marginTop="@dimen/space_8"
+                android:text="@{viewModel.bssid}"
+                tools:text="value" />
 
         </LinearLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/space_32"
-            android:text="@{viewModel.googleFitAppState}"
-            tools:text="@string/text_have_google_fit" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/space_32"
-            android:layout_marginTop="@dimen/space_16"
-            android:text="@string/text_advertising_id"
-            android:textColor="@color/textPrimary"
-            android:textSize="20sp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/space_32"
-            android:layout_marginTop="@dimen/space_8"
-            android:text="@{viewModel.advertisingId}"
-            tools:text="value" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/space_32"
-            android:layout_marginTop="@dimen/space_16"
-            android:text="@string/text_global_ip_address"
-            android:textColor="@color/textPrimary"
-            android:textSize="20sp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/space_32"
-            android:layout_marginTop="@dimen/space_8"
-            android:text="@{viewModel.globalIPAddress}"
-            tools:text="value" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/space_32"
-            android:layout_marginTop="@dimen/space_16"
-            android:text="@string/text_local_ip_address"
-            android:textColor="@color/textPrimary"
-            android:textSize="20sp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/space_32"
-            android:layout_marginTop="@dimen/space_8"
-            android:text="@{viewModel.localIPAddress}"
-            tools:text="value" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/space_32"
-            android:layout_marginTop="@dimen/space_16"
-            android:text="@string/text_wifi_info"
-            android:textColor="@color/textPrimary"
-            android:textSize="20sp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/space_32"
-            android:layout_marginTop="@dimen/space_8"
-            android:text="@{viewModel.ssid}"
-            tools:text="value" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/space_32"
-            android:layout_marginTop="@dimen/space_8"
-            android:text="@{viewModel.bssid}"
-            tools:text="value" />
-
-    </LinearLayout>
+    </ScrollView>
 
 </layout>
