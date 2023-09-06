@@ -16,6 +16,8 @@ import android.widget.Spinner
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.FragmentNavigatorExtras
+import androidx.navigation.fragment.findNavController
 import com.example.yusakumaki.functionconfirm.R
 import com.example.yusakumaki.functionconfirm.databinding.FragmentProfileBinding
 import com.example.yusakumaki.functionconfirm.helper.StepCountHelper
@@ -41,10 +43,6 @@ class ProfileFragment : Fragment() {
         binding.lifecycleOwner = this
 
         viewModel.updatePermission()
-        viewModel.requestAdvertisingId()
-        viewModel.fetchGlobalIPAddress()
-        viewModel.fetchLocalIPAddress()
-        viewModel.requestWifiInfo()
 
         val needsStrikeThrough = true
         binding.sampleTextView.apply {
@@ -55,6 +53,9 @@ class ProfileFragment : Fragment() {
         }
         viewModel.state.observe(viewLifecycleOwner) {
             Toast.makeText(context, "tap action", Toast.LENGTH_SHORT).show()
+        }
+        viewModel.showTerminalInfoEvent.observe(viewLifecycleOwner) {
+            findNavController().navigate(R.id.show_terminal_info_fragment, null, null, null)
         }
         viewModel.checkGoogleSignIn.observe(viewLifecycleOwner) {
             StepCountHelper.checkGoogleSignIn(this) {

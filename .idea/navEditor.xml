@@ -53,15 +53,6 @@
                             <option name="y" value="223" />
                           </Point>
                         </option>
-                        <option name="myPositions">
-                          <map>
-                            <entry key="show_second_fragment">
-                              <value>
-                                <LayoutPositions />
-                              </value>
-                            </entry>
-                          </map>
-                        </option>
                       </LayoutPositions>
                     </value>
                   </entry>
@@ -78,6 +69,11 @@
                     </value>
                   </entry>
                   <entry key="show_main_fragment">
+                    <value>
+                      <LayoutPositions />
+                    </value>
+                  </entry>
+                  <entry key="show_second_fragment">
                     <value>
                       <LayoutPositions />
                     </value>

@@ -27,8 +27,13 @@
         android:id="@+id/nav_main_fragment"
         android:name="com.example.yusakumaki.functionconfirm.fragments.MainFragment"
         android:label="fragment_main"
-        android:tag="tag_main_fragment" >
-    </custom_fragment>
+        android:tag="tag_main_fragment" />
+
+    <custom_fragment
+        android:id="@+id/nav_terminal_info_fragment"
+        android:name="com.example.yusakumaki.functionconfirm.fragments.TerminalInfoFragment"
+        android:label="fragment_terminal_info"
+        android:tag="tag_terminal_info_fragment" />
 
     <!--action-->
 
@@ -37,10 +42,15 @@
         app:destination="@id/nav_second_fragment" />
 
     <action
+        android:id="@+id/show_terminal_info_fragment"
+        app:destination="@id/nav_terminal_info_fragment" />
+
+    <action
         android:id="@+id/show_main_fragment"
         app:destination="@id/nav_main_fragment" />
 
     <action
         android:id="@+id/action_back_to_mainFragment"
         app:destination="@id/tab0" />
+
 </navigation>
