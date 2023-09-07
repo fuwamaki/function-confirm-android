@@ -17,9 +17,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.google.android.gms.ads.identifier.AdvertisingIdClient
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.channels.awaitClose
+import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
-import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.flow.zip
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -58,11 +59,20 @@ class TerminalInfoViewModel(application: Application) : AndroidViewModel(applica
 //                _globalIPAddress.postValue(it)
 //            }
 
-            advertisingId.zip(globalIPAddress) { a, b -> a to b }
+            val localIPAddress = fetchLocalIPAddress()
+//            localIPAddress.collect {
+//                _localIPAddress.postValue(it)
+//            }
+
+            advertisingId
+                .zip(globalIPAddress) { a, b -> a to b }
+                .zip(localIPAddress) { a, b -> Triple(a.first, a.second, b) }
                 .collect {
                     _advertisingId.postValue(it.first)
                     _globalIPAddress.postValue(it.second)
+                    _localIPAddress.postValue(it.third)
                 }
+
         }
     }
 
@@ -98,18 +108,19 @@ class TerminalInfoViewModel(application: Application) : AndroidViewModel(applica
         }
     }.flowOn(Dispatchers.IO)
 
-    fun fetchLocalIPAddress() {
-        val manager: ConnectivityManager =
-            context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+    private suspend fun fetchLocalIPAddress() = callbackFlow {
+        val manager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val networkCallback = object : ConnectivityManager.NetworkCallback() {
             override fun onLinkPropertiesChanged(network: Network, linkProperties: LinkProperties) {
                 super.onLinkPropertiesChanged(network, linkProperties)
-                val value = linkProperties.linkAddresses.firstOrNull { it.address is Inet4Address }
-                    .toString()
-                _localIPAddress.postValue(value)
+                val value = linkProperties.linkAddresses
+                    .firstOrNull { it.address is Inet4Address }
+                    ?.toString()
+                trySend(value)
             }
         }
         manager.registerDefaultNetworkCallback(networkCallback)
+        awaitClose { manager.unregisterNetworkCallback(networkCallback) }
     }
 
     fun requestWifiInfo() {
