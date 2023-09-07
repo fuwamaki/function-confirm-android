@@ -19,6 +19,8 @@ import com.google.android.gms.ads.identifier.AdvertisingIdClient
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.toList
+import kotlinx.coroutines.flow.zip
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import okhttp3.OkHttpClient
@@ -47,14 +49,20 @@ class TerminalInfoViewModel(application: Application) : AndroidViewModel(applica
     fun onCreate() {
         viewModelScope.launch {
             val advertisingId = requestAdvertisingId()
-            advertisingId.collect {
-                _advertisingId.postValue(it)
-            }
+//            advertisingId.collect {
+//                _advertisingId.postValue(it)
+//            }
 
             val globalIPAddress = fetchGlobalIPAddress()
-            globalIPAddress.collect {
-                _globalIPAddress.postValue(it)
-            }
+//            globalIPAddress.collect {
+//                _globalIPAddress.postValue(it)
+//            }
+
+            advertisingId.zip(globalIPAddress) { a, b -> a to b }
+                .collect {
+                    _advertisingId.postValue(it.first)
+                    _globalIPAddress.postValue(it.second)
+                }
         }
     }
 
