@@ -16,18 +16,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.google.android.gms.ads.identifier.AdvertisingIdClient
-import com.google.android.gms.common.GooglePlayServicesNotAvailableException
-import com.google.android.gms.common.GooglePlayServicesRepairableException
-import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import okhttp3.OkHttpClient
 import okhttp3.Request
-import timber.log.Timber
 import java.net.Inet4Address
 
 class TerminalInfoViewModel(application: Application) : AndroidViewModel(application) {
@@ -55,13 +50,17 @@ class TerminalInfoViewModel(application: Application) : AndroidViewModel(applica
             advertisingId.collect {
                 _advertisingId.postValue(it)
             }
+
+            val globalIPAddress = fetchGlobalIPAddress()
+            globalIPAddress.collect {
+                _globalIPAddress.postValue(it)
+            }
         }
     }
 
     private suspend fun requestAdvertisingId() = flow {
         kotlin.runCatching {
-            val info = AdvertisingIdClient.getAdvertisingIdInfo(context)
-            info.id
+            AdvertisingIdClient.getAdvertisingIdInfo(context).id
         }.onSuccess {
             emit(it)
         }.onFailure {
@@ -69,8 +68,8 @@ class TerminalInfoViewModel(application: Application) : AndroidViewModel(applica
         }
     }.flowOn(Dispatchers.IO)
 
-    fun fetchGlobalIPAddress() {
-        viewModelScope.launch {
+    private suspend fun fetchGlobalIPAddress() = flow {
+        kotlin.runCatching {
             val request = Request.Builder()
                 .url("https://icanhazip.com/")
                 .build()
@@ -83,9 +82,13 @@ class TerminalInfoViewModel(application: Application) : AndroidViewModel(applica
                     }
                 }
             }
-            _globalIPAddress.postValue(result?.replace("[\n\r]".toRegex(), ""))
+            result?.replace("[\n\r]".toRegex(), "")
+        }.onSuccess {
+            emit(it)
+        }.onFailure {
+            emit(null)
         }
-    }
+    }.flowOn(Dispatchers.IO)
 
     fun fetchLocalIPAddress() {
         val manager: ConnectivityManager =
