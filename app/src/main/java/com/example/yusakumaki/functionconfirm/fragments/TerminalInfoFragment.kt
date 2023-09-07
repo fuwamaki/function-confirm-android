@@ -16,7 +16,7 @@ class TerminalInfoFragment : Fragment() {
     private lateinit var binding: FragmentTerminalInfoBinding
 
     private val viewModel: TerminalInfoViewModel by lazy {
-        ViewModelProvider(this).get(TerminalInfoViewModel::class.java)
+        ViewModelProvider(this)[TerminalInfoViewModel::class.java]
     }
 
     private val locationPermissionLauncher = registerForActivityResult(

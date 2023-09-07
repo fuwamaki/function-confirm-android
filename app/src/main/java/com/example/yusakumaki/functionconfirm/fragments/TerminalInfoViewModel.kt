@@ -98,7 +98,6 @@ class TerminalInfoViewModel(application: Application) : AndroidViewModel(applica
     }
 
     fun requestWifiInfo() {
-        // TODO: 位置情報のリクエスト
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             val manager =
                 context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
