@@ -50,10 +50,10 @@ class TerminalInfoFragment : Fragment() {
             )
         )
 
-        viewModel.requestAdvertisingId()
-        viewModel.fetchGlobalIPAddress()
-        viewModel.fetchLocalIPAddress()
-        viewModel.requestWifiInfo()
+        viewModel.onCreate()
+//        viewModel.fetchGlobalIPAddress()
+//        viewModel.fetchLocalIPAddress()
+//        viewModel.requestWifiInfo()
 
         return binding.root
     }

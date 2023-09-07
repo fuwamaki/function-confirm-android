@@ -21,6 +21,8 @@ import com.google.android.gms.common.GooglePlayServicesRepairableException
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import okhttp3.OkHttpClient
@@ -47,23 +49,25 @@ class TerminalInfoViewModel(application: Application) : AndroidViewModel(applica
 
     private val okHttpClient = OkHttpClient.Builder().build()
 
-    @OptIn(DelicateCoroutinesApi::class)
-    fun requestAdvertisingId() {
-        GlobalScope.launch {
-            try {
-                val info = AdvertisingIdClient.getAdvertisingIdInfo(context)
-                if (!info.isLimitAdTrackingEnabled) {
-                    _advertisingId.postValue(info.id)
-                } else {
-                    Timber.d("isLimitAdTrackingEnabled: true")
-                }
-            } catch (e: GooglePlayServicesNotAvailableException) {
-                Timber.d(e)
-            } catch (e: GooglePlayServicesRepairableException) {
-                Timber.d(e)
+    fun onCreate() {
+        viewModelScope.launch {
+            val advertisingId = requestAdvertisingId()
+            advertisingId.collect {
+                _advertisingId.postValue(it)
             }
         }
     }
+
+    private suspend fun requestAdvertisingId() = flow {
+        kotlin.runCatching {
+            val info = AdvertisingIdClient.getAdvertisingIdInfo(context)
+            info.id
+        }.onSuccess {
+            emit(it)
+        }.onFailure {
+            emit(null)
+        }
+    }.flowOn(Dispatchers.IO)
 
     fun fetchGlobalIPAddress() {
         viewModelScope.launch {
