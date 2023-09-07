@@ -54,12 +54,12 @@ class TerminalInfoViewModel(application: Application) : AndroidViewModel(applica
 //                _advertisingId.postValue(it)
 //            }
 
-            val globalIPAddress = fetchGlobalIPAddress()
+            val globalIPAddress = getGlobalIPAddress()
 //            globalIPAddress.collect {
 //                _globalIPAddress.postValue(it)
 //            }
 
-            val localIPAddress = fetchLocalIPAddress()
+            val localIPAddress = getLocalIPAddress()
 //            localIPAddress.collect {
 //                _localIPAddress.postValue(it)
 //            }
@@ -93,7 +93,7 @@ class TerminalInfoViewModel(application: Application) : AndroidViewModel(applica
         }
     }.flowOn(Dispatchers.IO)
 
-    private suspend fun fetchGlobalIPAddress() = flow {
+    private suspend fun getGlobalIPAddress() = flow {
         kotlin.runCatching {
             val request = Request.Builder()
                 .url("https://icanhazip.com/")
@@ -115,7 +115,7 @@ class TerminalInfoViewModel(application: Application) : AndroidViewModel(applica
         }
     }.flowOn(Dispatchers.IO)
 
-    private suspend fun fetchLocalIPAddress() = callbackFlow {
+    private suspend fun getLocalIPAddress() = callbackFlow {
         val manager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val networkCallback = object : ConnectivityManager.NetworkCallback() {
             override fun onLinkPropertiesChanged(network: Network, linkProperties: LinkProperties) {
@@ -124,6 +124,11 @@ class TerminalInfoViewModel(application: Application) : AndroidViewModel(applica
                     .firstOrNull { it.address is Inet4Address }
                     ?.toString()
                 trySend(value)
+            }
+
+            override fun onLost(network: Network) {
+                super.onLost(network)
+                trySend(null)
             }
         }
         manager.registerDefaultNetworkCallback(networkCallback)
