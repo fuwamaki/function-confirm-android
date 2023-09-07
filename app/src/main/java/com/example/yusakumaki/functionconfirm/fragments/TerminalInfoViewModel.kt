@@ -10,11 +10,11 @@ import android.net.NetworkRequest
 import android.net.wifi.WifiInfo
 import android.net.wifi.WifiManager
 import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.example.yusakumaki.functionconfirm.entity.TerminalInfoData
 import com.google.android.gms.ads.identifier.AdvertisingIdClient
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.awaitClose
@@ -64,13 +64,20 @@ class TerminalInfoViewModel(application: Application) : AndroidViewModel(applica
 //                _localIPAddress.postValue(it)
 //            }
 
+            val wifiInfo = requestWifiInfo()
+
             advertisingId
                 .zip(globalIPAddress) { a, b -> a to b }
                 .zip(localIPAddress) { a, b -> Triple(a.first, a.second, b) }
+                .zip(wifiInfo) { a, b ->
+                    TerminalInfoData(a.first, a.second, a.third, b?.ssid, b?.bssid)
+                }
                 .collect {
-                    _advertisingId.postValue(it.first)
-                    _globalIPAddress.postValue(it.second)
-                    _localIPAddress.postValue(it.third)
+                    _advertisingId.postValue(it.advertisingId)
+                    _globalIPAddress.postValue(it.globalIPAddress)
+                    _localIPAddress.postValue(it.localIPAddress)
+                    _ssid.postValue(it.ssid)
+                    _bssid.postValue(it.bssid)
                 }
 
         }
@@ -123,48 +130,26 @@ class TerminalInfoViewModel(application: Application) : AndroidViewModel(applica
         awaitClose { manager.unregisterNetworkCallback(networkCallback) }
     }
 
-    fun requestWifiInfo() {
+    private suspend fun requestWifiInfo() = callbackFlow {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            val manager =
-                context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-            requestNetworkCapability(manager)
+            val manager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+            val request = NetworkRequest.Builder()
+                .addTransportType(NetworkCapabilities.TRANSPORT_WIFI)
+                .build()
+
+            // FLAG_INCLUDE_LOCATION_INFOを指定しないとWifiInfoが取得できない
+            val callback = object : ConnectivityManager.NetworkCallback(FLAG_INCLUDE_LOCATION_INFO) {
+                override fun onCapabilitiesChanged(network: Network, networkCapabilities: NetworkCapabilities) {
+                    super.onCapabilitiesChanged(network, networkCapabilities)
+                    trySend(networkCapabilities.transportInfo as? WifiInfo)
+                }
+            }
+            manager.registerNetworkCallback(request, callback)
+            awaitClose { manager.unregisterNetworkCallback(callback) }
         } else {
-            val manager =
-                context.applicationContext.getSystemService(Context.WIFI_SERVICE) as WifiManager
-            val info: WifiInfo = manager.connectionInfo
-            _ssid.postValue(info.ssid)
-            _bssid.postValue(info.bssid)
+            val manager = context.applicationContext.getSystemService(Context.WIFI_SERVICE) as? WifiManager
+            @Suppress("DEPRECATION")
+            trySend(manager?.connectionInfo)
         }
-    }
-
-    @RequiresApi(Build.VERSION_CODES.S)
-    private fun requestNetworkCapability(manager: ConnectivityManager) {
-        val request = NetworkRequest.Builder()
-            .addTransportType(NetworkCapabilities.TRANSPORT_WIFI)
-            .build()
-
-        // FLAG_INCLUDE_LOCATION_INFOを指定しないとWifiInfoが取得できない
-        val callback = object : ConnectivityManager.NetworkCallback(FLAG_INCLUDE_LOCATION_INFO) {
-            override fun onCapabilitiesChanged(
-                network: Network,
-                networkCapabilities: NetworkCapabilities
-            ) {
-                super.onCapabilitiesChanged(network, networkCapabilities)
-                val wifi =
-                    (networkCapabilities.transportInfo as? WifiInfo) ?: return@onCapabilitiesChanged
-                _ssid.postValue(wifi.ssid)
-                _bssid.postValue(wifi.bssid)
-            }
-
-            override fun onAvailable(network: Network) {
-                super.onAvailable(network)
-                val wifi = (manager.getNetworkCapabilities(network)?.transportInfo as? WifiInfo)
-                    ?: return@onAvailable
-                _ssid.postValue(wifi.ssid)
-                _bssid.postValue(wifi.bssid)
-            }
-        }
-        manager.registerNetworkCallback(request, callback)
-        manager.requestNetwork(request, callback)
     }
 }
