@@ -123,6 +123,8 @@ class TerminalInfoViewModel(application: Application) : AndroidViewModel(applica
                 val value = linkProperties.linkAddresses
                     .firstOrNull { it.address is Inet4Address }
                     ?.toString()
+                    ?.split("/")
+                    ?.firstOrNull()
                 trySend(value)
             }
 
