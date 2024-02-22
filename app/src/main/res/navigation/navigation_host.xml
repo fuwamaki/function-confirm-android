@@ -35,6 +35,12 @@
         android:label="fragment_terminal_info"
         android:tag="tag_terminal_info_fragment" />
 
+    <custom_fragment
+        android:id="@+id/nav_card_pages_fragment"
+        android:name="com.example.yusakumaki.functionconfirm.fragments.CardPagesFragment"
+        android:label="fragment_card_pages"
+        android:tag="tag_card_pages_fragment" />
+
     <!--action-->
 
     <action
@@ -44,6 +50,10 @@
     <action
         android:id="@+id/show_terminal_info_fragment"
         app:destination="@id/nav_terminal_info_fragment" />
+
+    <action
+        android:id="@+id/show_card_pages_fragment"
+        app:destination="@id/nav_card_pages_fragment" />
 
     <action
         android:id="@+id/show_main_fragment"
