@@ -1,5 +1,4 @@
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
 
@@ -19,14 +18,53 @@
             android:orientation="vertical"
             android:paddingVertical="@dimen/space_16">
 
-            <TextView
+            <Button
+                android:id="@+id/button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/space_32"
-                android:layout_marginTop="@dimen/space_16"
-                android:text="@string/text_advertising_id"
-                android:textColor="@color/textPrimary"
-                android:textSize="20sp" />
+                android:text="@string/text_button" />
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="500dp">
+
+                <View
+                    android:id="@+id/sample_view4"
+                    android:layout_width="250dp"
+                    android:layout_height="400dp"
+                    android:background="@color/salmon"
+                    android:rotation="15"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginStart="95dp" />
+
+                <View
+                    android:id="@+id/sample_view3"
+                    android:layout_width="250dp"
+                    android:layout_height="400dp"
+                    android:background="@color/mint"
+                    android:rotation="10"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginStart="70dp" />
+
+                <View
+                    android:id="@+id/sample_view2"
+                    android:layout_width="250dp"
+                    android:layout_height="400dp"
+                    android:background="@color/grape"
+                    android:rotation="5"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginStart="45dp" />
+
+                <View
+                    android:id="@+id/sample_view"
+                    android:layout_width="250dp"
+                    android:layout_height="400dp"
+                    android:background="@color/aqua"
+                    android:rotation="0"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginStart="20dp" />
+
+            </FrameLayout>
 
         </LinearLayout>
 
