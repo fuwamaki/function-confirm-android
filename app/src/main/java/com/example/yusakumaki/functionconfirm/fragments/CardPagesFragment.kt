@@ -23,9 +23,16 @@ import kotlin.math.abs
 
 class CardPagesFragment : Fragment(), GestureDetector.OnGestureListener {
     companion object {
-        private const val TAKE_CARD_DURATION = 200L
+        private const val HINDU_CARD_DURATION = 300L
+
+        private const val TAKE_FRONT_CARD_DURATION = 200L
         private const val BRING_CHILD_TO_BACK_DURATION = 100L
         private const val BRING_CHILD_TO_BACK_DELAY = 210L
+
+        private const val TAKE_BACK_CARD_DURATION = 50L
+        private const val BRING_CHILD_TO_FRONT_DURATION = 150L
+        private const val BRING_CHILD_TO_FRONT_DELAY = 150L
+
         private const val MIN_SWIPE_DISTANCE_X = 100
         private const val MIN_SWIPE_DISTANCE_Y = 100
         private const val MAX_SWIPE_DISTANCE_X = 2000
@@ -90,21 +97,21 @@ class CardPagesFragment : Fragment(), GestureDetector.OnGestureListener {
         isAnimationRunning = true
         // first: fade out
         ObjectAnimator.ofFloat(cardView(cardPageTypes[0]), View.ALPHA, 1.0f, 0.0f).apply {
-            duration = TAKE_CARD_DURATION
+            duration = TAKE_FRONT_CARD_DURATION
             interpolator = AccelerateInterpolator()
             start()
         }
 
         // first: rotate
         ObjectAnimator.ofFloat(cardView(cardPageTypes[0]), View.ROTATION, 0f, -5f).apply {
-            duration = TAKE_CARD_DURATION
+            duration = TAKE_FRONT_CARD_DURATION
             interpolator = AccelerateInterpolator()
             start()
         }
 
         // first: translate
         ObjectAnimator.ofFloat(cardView(cardPageTypes[0]), "translationX", cardView(cardPageTypes[0]).translationX-resources.getDimension(R.dimen.size_25)).apply {
-            duration = TAKE_CARD_DURATION
+            duration = TAKE_FRONT_CARD_DURATION
             interpolator = AccelerateInterpolator()
             start()
         }
@@ -117,16 +124,16 @@ class CardPagesFragment : Fragment(), GestureDetector.OnGestureListener {
         }
         ObjectAnimator.ofFloat(cardView(cardPageTypes[0]), View.ROTATION, -5f, 15f).apply {
             duration = 0
-            startDelay = TAKE_CARD_DURATION
+            startDelay = TAKE_FRONT_CARD_DURATION
             start()
         }
         ObjectAnimator.ofFloat(cardView(cardPageTypes[0]), "translationX", cardView(cardPageTypes[0]).translationX+resources.getDimension(R.dimen.size_25)*3).apply {
             duration = 0
-            startDelay = TAKE_CARD_DURATION
+            startDelay = TAKE_FRONT_CARD_DURATION
             start()
         }
         CoroutineScope(Dispatchers.Main).launch {
-            delay(TAKE_CARD_DURATION)
+            delay(TAKE_FRONT_CARD_DURATION)
             binding.cardsFrameLayout.bringChildToFront(cardView(cardPageTypes[3]))
             binding.cardsFrameLayout.bringChildToFront(cardView(cardPageTypes[2]))
             binding.cardsFrameLayout.bringChildToFront(cardView(cardPageTypes[1]))
@@ -142,44 +149,155 @@ class CardPagesFragment : Fragment(), GestureDetector.OnGestureListener {
 
         // second: rotate
         ObjectAnimator.ofFloat(cardView(cardPageTypes[1]), View.ROTATION, 5f, 0f).apply {
-            duration = TAKE_CARD_DURATION
+            duration = TAKE_FRONT_CARD_DURATION
             interpolator = AccelerateInterpolator()
             start()
         }
 
         // second: translate
         ObjectAnimator.ofFloat(cardView(cardPageTypes[1]), "translationX", cardView(cardPageTypes[1]).translationX-resources.getDimension(R.dimen.size_25)).apply {
-            duration = TAKE_CARD_DURATION
+            duration = TAKE_FRONT_CARD_DURATION
             interpolator = AccelerateInterpolator()
             start()
         }
 
         // third: rotate
         ObjectAnimator.ofFloat(cardView(cardPageTypes[2]), View.ROTATION, 10f, 5f).apply {
-            duration = TAKE_CARD_DURATION
+            duration = TAKE_FRONT_CARD_DURATION
             interpolator = AccelerateInterpolator()
             start()
         }
 
         // third: translate
         ObjectAnimator.ofFloat(cardView(cardPageTypes[2]), "translationX", cardView(cardPageTypes[2]).translationX-resources.getDimension(R.dimen.size_25)).apply {
-            duration = TAKE_CARD_DURATION
+            duration = TAKE_FRONT_CARD_DURATION
             interpolator = AccelerateInterpolator()
             start()
         }
 
         // fourth: rotate
         ObjectAnimator.ofFloat(cardView(cardPageTypes[3]), View.ROTATION, 15f, 10f).apply {
-            duration = TAKE_CARD_DURATION
+            duration = TAKE_FRONT_CARD_DURATION
             interpolator = AccelerateInterpolator()
             start()
         }
 
         // fourth: translate
         ObjectAnimator.ofFloat(cardView(cardPageTypes[3]), "translationX", cardView(cardPageTypes[3]).translationX-resources.getDimension(R.dimen.size_25)).apply {
-
-            duration = TAKE_CARD_DURATION
+            duration = TAKE_FRONT_CARD_DURATION
             interpolator = AccelerateInterpolator()
+            start()
+        }
+    }
+
+    private fun swipeRightAnimation() {
+        if (isAnimationRunning) return
+        isAnimationRunning = true
+
+        // first: rotate
+        ObjectAnimator.ofFloat(cardView(cardPageTypes[0]), View.ROTATION, 0f, 5f).apply {
+            duration = HINDU_CARD_DURATION
+            interpolator = AccelerateInterpolator()
+            start()
+        }
+
+        // first: translate
+        ObjectAnimator.ofFloat(cardView(cardPageTypes[0]), "translationX", cardView(cardPageTypes[0]).translationX+resources.getDimension(R.dimen.size_25)).apply {
+            duration = HINDU_CARD_DURATION
+            interpolator = AccelerateInterpolator()
+            start()
+        }
+
+        // second: rotate
+        ObjectAnimator.ofFloat(cardView(cardPageTypes[1]), View.ROTATION, 5f, 10f).apply {
+            duration = HINDU_CARD_DURATION
+            interpolator = AccelerateInterpolator()
+            start()
+        }
+
+        // second: translate
+        ObjectAnimator.ofFloat(cardView(cardPageTypes[1]), "translationX", cardView(cardPageTypes[1]).translationX+resources.getDimension(R.dimen.size_25)).apply {
+            duration = HINDU_CARD_DURATION
+            interpolator = AccelerateInterpolator()
+            start()
+        }
+
+        // third: rotate
+        ObjectAnimator.ofFloat(cardView(cardPageTypes[2]), View.ROTATION, 10f, 15f).apply {
+            duration = HINDU_CARD_DURATION
+            interpolator = AccelerateInterpolator()
+            start()
+        }
+
+        // third: translate
+        ObjectAnimator.ofFloat(cardView(cardPageTypes[2]), "translationX", cardView(cardPageTypes[2]).translationX+resources.getDimension(R.dimen.size_25)).apply {
+            duration = HINDU_CARD_DURATION
+            interpolator = AccelerateInterpolator()
+            start()
+        }
+
+        // forth: fade out
+        ObjectAnimator.ofFloat(cardView(cardPageTypes[3]), View.ALPHA, 1.0f, 0.0f).apply {
+            duration = TAKE_BACK_CARD_DURATION
+            interpolator = AccelerateInterpolator()
+            start()
+        }
+
+        // fourth: rotate
+        ObjectAnimator.ofFloat(cardView(cardPageTypes[3]), View.ROTATION, 15f, 20f).apply {
+            duration = TAKE_BACK_CARD_DURATION
+            interpolator = AccelerateInterpolator()
+            start()
+        }
+
+        // fourth: translate
+        ObjectAnimator.ofFloat(cardView(cardPageTypes[3]), "translationX", cardView(cardPageTypes[3]).translationX+resources.getDimension(R.dimen.size_25)).apply {
+            duration = TAKE_BACK_CARD_DURATION
+            interpolator = AccelerateInterpolator()
+            start()
+        }
+
+        // fourth: 動作後、一番前に移動
+        CoroutineScope(Dispatchers.Main).launch {
+            delay(TAKE_BACK_CARD_DURATION)
+            binding.cardsFrameLayout.bringChildToFront(cardView(cardPageTypes[3]))
+            delay(300)
+            cardPageTypes = arrayOf(
+                cardPageTypes[3],
+                cardPageTypes[0],
+                cardPageTypes[1],
+                cardPageTypes[2],
+            )
+            isAnimationRunning = false
+        }
+
+//        // fourth: 向きと位置を調整
+        ObjectAnimator.ofFloat(cardView(cardPageTypes[3]), View.ROTATION, 20f, -5f).apply {
+            duration = 1
+            startDelay = TAKE_BACK_CARD_DURATION
+            start()
+        }
+        val aaa: Float = cardView(cardPageTypes[3]).translationX-resources.getDimension(R.dimen.size_25)*4
+        ObjectAnimator.ofFloat(cardView(cardPageTypes[3]), "translationX", aaa).apply {
+            duration = 1
+            startDelay = TAKE_BACK_CARD_DURATION
+            start()
+        }
+
+        // fourth: 再度動作
+        ObjectAnimator.ofFloat(cardView(cardPageTypes[3]), View.ROTATION, -5f, 0f).apply {
+            duration = BRING_CHILD_TO_FRONT_DURATION
+            startDelay = BRING_CHILD_TO_FRONT_DELAY
+            start()
+        }
+        ObjectAnimator.ofFloat(cardView(cardPageTypes[3]), View.ALPHA, 0.0f, 1.0f).apply {
+            duration = BRING_CHILD_TO_FRONT_DURATION
+            startDelay = BRING_CHILD_TO_FRONT_DELAY
+            start()
+        }
+        ObjectAnimator.ofFloat(cardView(cardPageTypes[3]), "translationX", aaa+resources.getDimension(R.dimen.size_25)).apply {
+            duration = BRING_CHILD_TO_FRONT_DURATION
+            startDelay = BRING_CHILD_TO_FRONT_DELAY
             start()
         }
     }
@@ -220,6 +338,7 @@ class CardPagesFragment : Fragment(), GestureDetector.OnGestureListener {
                 swipeLeftAnimation()
             } else {
                 Timber.d("batchSwipe: RIGHT")
+                swipeRightAnimation()
             }
         } else if ((deltaYAbs >= MIN_SWIPE_DISTANCE_Y) && (deltaYAbs <= MAX_SWIPE_DISTANCE_Y)) {
             if (deltaY > 0) {
