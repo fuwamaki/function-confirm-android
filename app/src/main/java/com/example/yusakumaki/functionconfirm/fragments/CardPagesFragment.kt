@@ -76,9 +76,9 @@ class CardPagesFragment : Fragment(), GestureDetector.OnGestureListener {
         viewModel.onCreate()
 
         cardViews = arrayOf(
-            firstView, secondView, thirdView, fourthView,
-            firstView, secondView, thirdView, fourthView,
-            firstView, secondView, thirdView, fourthView,
+            firstView, secondView, thirdView, fourthView, // 非表示部
+            firstView, secondView, thirdView, fourthView, // 表示部
+            firstView, secondView, thirdView, fourthView, // 非表示部
         )
         cardViews.reversed().forEachIndexed { index, view ->
             val computeIndex = (cardViewsParSize * 2 - (index + 1))
