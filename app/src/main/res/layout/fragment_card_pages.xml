@@ -1,4 +1,5 @@
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -29,41 +30,45 @@
                 android:layout_width="match_parent"
                 android:layout_height="500dp">
 
-                <View
+                <androidx.cardview.widget.CardView
                     android:id="@+id/sample_view4"
                     android:layout_width="250dp"
                     android:layout_height="400dp"
-                    android:background="@color/salmon"
-                    android:rotation="15"
+                    android:layout_marginStart="95dp"
                     android:layout_marginTop="30dp"
-                    android:layout_marginStart="95dp" />
+                    android:backgroundTint="@color/salmon"
+                    android:rotation="15"
+                    app:cardCornerRadius="16dp" />
 
-                <View
+                <androidx.cardview.widget.CardView
                     android:id="@+id/sample_view3"
                     android:layout_width="250dp"
                     android:layout_height="400dp"
-                    android:background="@color/mint"
-                    android:rotation="10"
+                    android:layout_marginStart="70dp"
                     android:layout_marginTop="30dp"
-                    android:layout_marginStart="70dp" />
+                    android:backgroundTint="@color/mint"
+                    android:rotation="10"
+                    app:cardCornerRadius="16dp" />
 
-                <View
+                <androidx.cardview.widget.CardView
                     android:id="@+id/sample_view2"
                     android:layout_width="250dp"
                     android:layout_height="400dp"
-                    android:background="@color/grape"
-                    android:rotation="5"
+                    android:layout_marginStart="45dp"
                     android:layout_marginTop="30dp"
-                    android:layout_marginStart="45dp" />
+                    android:backgroundTint="@color/grape"
+                    android:rotation="5"
+                    app:cardCornerRadius="16dp" />
 
-                <View
+                <androidx.cardview.widget.CardView
                     android:id="@+id/sample_view"
                     android:layout_width="250dp"
                     android:layout_height="400dp"
-                    android:background="@color/aqua"
-                    android:rotation="0"
+                    android:layout_marginStart="20dp"
                     android:layout_marginTop="30dp"
-                    android:layout_marginStart="20dp" />
+                    android:backgroundTint="@color/aqua"
+                    android:rotation="0"
+                    app:cardCornerRadius="16dp" />
 
             </FrameLayout>
 
