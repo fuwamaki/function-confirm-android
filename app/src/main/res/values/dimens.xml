@@ -9,6 +9,8 @@
     <dimen name="space_8">8dp</dimen>
     <dimen name="space_16">16dp</dimen>
     <dimen name="space_24">24dp</dimen>
+    <dimen name="space_28">28dp</dimen>
+    <dimen name="space_30">30dp</dimen>
     <dimen name="space_32">32dp</dimen>
     <dimen name="space_40">40dp</dimen>
     <dimen name="space_48">48dp</dimen>
