@@ -34,6 +34,8 @@
     <dimen name="size_72">72dp</dimen>
     <dimen name="size_120">120dp</dimen>
 
+    <dimen name="size_25">25dp</dimen>
+
     <!--border-->
     <dimen name="border_1">1dp</dimen>
 
