@@ -18,6 +18,11 @@ import com.example.yusakumaki.functionconfirm.extension.hinduFadeIn
 import com.example.yusakumaki.functionconfirm.extension.hinduFadeOut
 import com.example.yusakumaki.functionconfirm.extension.hinduRotate
 import com.example.yusakumaki.functionconfirm.extension.hinduTranslationX
+import com.example.yusakumaki.functionconfirm.views.BaseCardView
+import com.example.yusakumaki.functionconfirm.views.FirstCardView
+import com.example.yusakumaki.functionconfirm.views.FourthCardView
+import com.example.yusakumaki.functionconfirm.views.SecondCardView
+import com.example.yusakumaki.functionconfirm.views.ThirdCardView
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -40,22 +45,22 @@ class CardPagesFragment : Fragment(), GestureDetector.OnGestureListener {
 
     private lateinit var binding: FragmentCardPagesBinding
     private lateinit var mDetector: GestureDetectorCompat
-    private var cardViews: Array<View> = arrayOf()
+    private var cardViews: Array<BaseCardView> = arrayOf()
 
     private val cardViewsParSize: Int
         get() = cardViews.size / 3
 
-    private val firstView: View
-        get() = layoutInflater.inflate(R.layout.view_first_card, binding.cardsFrameLayout, false)
+    private val firstView: BaseCardView
+        get() = FirstCardView(requireContext())
 
-    private val secondView: View
-        get() = layoutInflater.inflate(R.layout.view_second_card, binding.cardsFrameLayout, false)
+    private val secondView: BaseCardView
+        get() = SecondCardView(requireContext())
 
-    private val thirdView: View
-        get() = layoutInflater.inflate(R.layout.view_third_card, binding.cardsFrameLayout, false)
+    private val thirdView: BaseCardView
+        get() = ThirdCardView(requireContext())
 
-    private val fourthView: View
-        get() = layoutInflater.inflate(R.layout.view_fourth_card, binding.cardsFrameLayout, false)
+    private val fourthView: BaseCardView
+        get() = FourthCardView(requireContext())
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreateView(
@@ -82,11 +87,18 @@ class CardPagesFragment : Fragment(), GestureDetector.OnGestureListener {
         )
         cardViews.reversed().forEachIndexed { index, view ->
             val computeIndex = (cardViewsParSize * 2 - (index + 1))
+            view.layoutParams = ViewGroup.LayoutParams(
+                resources.getDimension(R.dimen.size_250).toInt(),
+                resources.getDimension(R.dimen.size_400).toInt()
+            )
             binding.cardsFrameLayout.addView(view)
             view.translationX = resources.getDimension(R.dimen.space_16) +
                     resources.getDimension(R.dimen.space_28) * computeIndex
             view.rotation = computeIndex * HINDU_ROTATE_VALUE
             view.alpha = if (index / cardViewsParSize == 1) 1f else 0f
+            if (index / cardViewsParSize == 1 && index % cardViewsParSize == 3) {
+                view.placedToFront()
+            }
         }
 
         binding.button.setOnClickListener {
@@ -116,6 +128,10 @@ class CardPagesFragment : Fragment(), GestureDetector.OnGestureListener {
                 view.hinduTranslationX(-translateValue)
                 view.hinduRotate(-rotateValue)
                 view.hinduFadeIn()
+            } else if (index / cardViewsParSize == 1 && index % cardViewsParSize == 1) { // 位置1番手前表示
+                view.hinduTranslationX(-translateValue)
+                view.hinduRotate(-rotateValue)
+                view.placedToFront()
             } else { // 回転
                 view.hinduTranslationX(-translateValue)
                 view.hinduRotate(-rotateValue)
@@ -149,10 +165,11 @@ class CardPagesFragment : Fragment(), GestureDetector.OnGestureListener {
                 view.hinduTranslationX(translateValue)
                 view.hinduRotate(rotateValue)
                 view.hinduFadeOut()
-            } else if (index / cardViewsParSize == 2 && index % cardViewsParSize == 0) { // 回転&表示にする
+            } else if (index / cardViewsParSize == 2 && index % cardViewsParSize == 0) { // 回転&表示にする（1番手前）
                 view.hinduTranslationX(translateValue)
                 view.hinduRotate(rotateValue)
                 view.hinduFadeIn()
+                view.placedToFront()
             } else { // 回転
                 view.hinduTranslationX(translateValue)
                 view.hinduRotate(rotateValue)

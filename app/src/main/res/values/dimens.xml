@@ -35,6 +35,8 @@
     <dimen name="size_64">64dp</dimen>
     <dimen name="size_72">72dp</dimen>
     <dimen name="size_120">120dp</dimen>
+    <dimen name="size_250">250dp</dimen>
+    <dimen name="size_400">400dp</dimen>
 
     <dimen name="size_25">25dp</dimen>
 
